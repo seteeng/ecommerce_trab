@@ -4,6 +4,9 @@ namespace Hcode;
 
 use Rain\Tpl;
 
+// include
+include "library/Rain/Tpl.php";
+
 class Page {
 
     private $tpl;
@@ -19,7 +22,7 @@ class Page {
         $config = array(
             "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/",
             "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
-            "debug"         => false
+            "debug"         => true
         );
 
         Tpl::configure( $config );
