@@ -4,6 +4,9 @@ namespace Hcode;
 
 use Rain\Tpl;
 
+// include
+//include "library/Rain/Tpl.php";
+
 class Page {
 
     private $tpl;
@@ -12,14 +15,14 @@ class Page {
         "data"=>[]
     ];
 
-    public function __construct($opts = array()) {
+    public function __construct($opts = array()) { //$tpl_dir = "/ecommerce/views/"
 
         $this->options = array_merge($this->defaults, $opts);
 
         $config = array(
-            "tpl_dir"       => "/ecommerce/views/",
-            "cache_dir"     => "/ecommerce/views-cache/",
-            "debug"         => false // set to false to improve the speed
+            "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/",
+            "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
+            "debug"         => true
         );
 
         Tpl::configure( $config );
@@ -28,13 +31,13 @@ class Page {
 
         $this->setData($this->options["data"]);
 
-        $this->draw("header");
+        $this->tpl->draw("header");
 
     }
 
     private function setData($data = array()) {
 
-        foreach ($this->options["data"] as $key => $value) {
+        foreach ($data as $key => $value) {
             $this->tpl->assign($key, $value);
         }
     }
@@ -43,12 +46,13 @@ class Page {
 
         $this->setData($data);
 
-        $this->tpl->draw($name, $returnHTML);
+        return $this->tpl->draw($name, $returnHTML);
     }
    
 
     public function __destruct() {
 
-        $this->draw("footer");
+        $this->tpl->draw("footer");
     }
 }
+?>
