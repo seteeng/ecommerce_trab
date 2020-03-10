@@ -4,9 +4,6 @@ namespace Hcode;
 
 use Rain\Tpl;
 
-// include
-//include "library/Rain/Tpl.php";
-
 class Page {
 
     private $tpl;
